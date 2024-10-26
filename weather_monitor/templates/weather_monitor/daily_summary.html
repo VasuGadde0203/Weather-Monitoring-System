@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Monitoring System</title>
+    <link rel="stylesheet" href="{% static 'weather_monitor/daily_summary.css' %}">
+</head>
+<body>
+    <h1>Welcome to the Daily Summary Analysis</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="city">Enter City:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">Get Weather Summary</button>
+    </form>
+    
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+    
+    <h2>Daily Weather Summary</h2>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>City</th>
+            <th>Average Temperature (°C)</th>
+            <th>Max Temperature (°C)</th>
+            <th>Min Temperature (°C)</th>
+            <th>Dominant Condition</th>
+        </tr>
+        {% for summary in summaries %}
+        <tr>
+            <td>{{ summary.date }}</td>
+            <td>{{ summary.city }}</td>
+            <td>{{ summary.avg_temp }}</td>
+            <td>{{ summary.max_temp }}</td>
+            <td>{{ summary.min_temp }}</td>
+            <td>{{ summary.dominant_weather }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No data available.</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    {% if graphic %}
+        <h2>Weather Trends Visualization</h2>
+        <img src="data:image/png;base64,{{ graphic }}" alt="Weather Trends">
+    {% endif %}
+</body>
+</html>
