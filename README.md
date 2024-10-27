@@ -46,7 +46,7 @@ To set up and run this project, install the following dependencies:
   - **git clone https:**//github.com/VasuGadde0203/Weather-Monitoring-System.git
   - cd Weather-Monitoring-System
 
-- Create a Virtual Environment
+- **Create a Virtual Environment**
   - python3 -m venv venv
   - source venv/bin/activate  # on Windows: venv\Scripts\activate
 
